@@ -1,12 +1,16 @@
 # Predicción del consumo de vapor
 
-Proyecto de regresión para estimar el consumo de vapor de la turbina del soplador principal FCC. Utiliza Random Forest con 14 variables y los hiperparámetros de la sección IV.A del paper incluido en `docs/`.
+Aplicación en Streamlit para estimar el consumo de vapor de la turbina del soplador FCC mediante Random Forest y 14 variables de operación.
 
-## 1. Ejecutar localmente
+## Ejecución local
 
-Instalar [uv](https://docs.astral.sh/uv/getting-started/installation/) y abrir esta carpeta en Visual Studio Code. Ejecutar desde la terminal:
+- Tener Git y uv instalados. El proyecto utiliza Python 3.12.
+- Descomprimir el proyecto ligero y abrir la carpeta `vapor_mlops` en Visual Studio Code: **Archivo → Abrir carpeta**.
+- Verificar los archivos en `data/raw/`: `df_operacion.csv` para entrenamiento (82 146 filas) y `df_operacion2.csv` para prueba (13 261 filas).
+- Abrir **Terminal → Nuevo terminal**, desde la carpeta que contiene `pyproject.toml`, y ejecutar en orden:
 
-```bash
+```powershell
+uv --version
 uv sync --locked
 uv run preparar-datos
 uv run entrenar
@@ -14,43 +18,42 @@ uv run pytest -v
 uv run streamlit run app/streamlit_app.py
 ```
 
-Abrir `http://localhost:8501` después de ejecutar el entrenamiento. Esta descarga incluye el código, los dos CSV y las métricas de referencia. El comando `uv run entrenar` genera `models/vapor_model.joblib`, necesario para iniciar la aplicación.
+- El entrenamiento genera `models/vapor_model.joblib` y guarda las métricas del modelo.
+- Abrir http://localhost:8501 y pulsar **Predecir consumo**. Para detener la aplicación local, presionar `Ctrl + C` en su terminal.
 
-## 2. Datos y modelo
+## Subir el proyecto a GitHub
 
-| Conjunto | Archivo en `data/raw/` | Registros |
-|---|---|---:|
-| TRAIN | `df_operacion.csv` | 82 146 |
-| TEST | `df_operacion2.csv` | 13 261 |
+- Crear el repositorio privado `vapor_mlops_final`, sin agregar README, licencia ni `.gitignore` desde GitHub.
+- Abrir otra terminal en Visual Studio Code y ejecutar, desde la carpeta del proyecto:
 
-TRAIN abarca del 1 de junio al 18 de agosto de 2026. TEST corresponde al periodo posterior, del 28 de agosto al 6 de septiembre de 2026. Esta separación coincide con la utilizada en el paper. Las métricas calculadas se guardan en `models/metrics.json`.
-
-El modelo tiene 200 árboles, profundidad máxima 20, `min_samples_split=2`, `min_samples_leaf=2` y `max_features=0.7`. Se utiliza `random_state=42` y un solo hilo. El objetivo se procesa en kg/h y la interfaz también muestra t/h.
-
-## 3. GitHub y Streamlit Community Cloud
-
-1. Publicar esta carpeta desde Visual Studio Code o Git en la rama `main` de un repositorio de GitHub.
-2. Permitir **Read and write permissions** en **Settings → Actions → General → Workflow permissions**, si la política del repositorio lo requiere.
-3. Esperar a que terminen **CI** y **CD** en la pestaña **Actions**. CI valida los datos, entrena, prueba y guarda el modelo. CD copia el mismo modelo validado y su código a la rama `deploy`.
-4. En [Streamlit Community Cloud](https://share.streamlit.io), seleccionar el repositorio, la rama **deploy** y el archivo **app/streamlit_app.py**. En las opciones avanzadas, elegir **Python 3.12**.
-5. Publicar la aplicación. Los siguientes cambios se suben a `main`; la rama `deploy` se actualiza cuando CI aprueba la versión.
-
-Streamlit carga el modelo en memoria una sola vez por proceso. No vuelve a entrenarlo ni necesita un servicio de Render. Su estado de publicación y los errores de arranque se consultan en Streamlit; CD confirma la actualización de la rama, no la disponibilidad del servicio.
-
-## 4. API y Docker (opcionales)
-
-```bash
-uv run uvicorn vapor_mlops.api:app --host 127.0.0.1 --port 8000
+```powershell
+git init -b main
+git add .
+git commit -m "Proyecto MLOps de prediccion de consumo de vapor"
+git remote add origin https://github.com/diegoayalavega1996-cmyk/vapor_mlops_final.git
+git push -u origin main
 ```
 
-Documentación de la API: `http://127.0.0.1:8000/docs`.
+- En GitHub, abrir **Actions** y esperar que **CI** y **CD** terminen correctamente. CI valida los datos, entrena y ejecuta las pruebas; CD publica el código y el modelo en la rama `deploy`.
 
-Con Docker instalado y los archivos de `models/` generados:
+## Publicar en Streamlit
 
-```bash
-docker compose up --build
+- Entrar a https://share.streamlit.io/ y seleccionar **Create app → Deploy now**.
+- En **Repository**, ingresar `diegoayalavega1996-cmyk/vapor_mlops_final`.
+- En **Branch**, seleccionar `deploy`.
+- En **Main file path**, ingresar `app/streamlit_app.py`. Dejar **App URL** vacío para generar el enlace automáticamente.
+- Abrir **Advanced settings**, elegir **Python 3.12**, pulsar **Save** y después **Deploy**.
+- Para permitir el acceso mediante el enlace, abrir **⋮ → Settings → Sharing** y seleccionar **This app is public and searchable**. Guardar y comprobar el enlace en una ventana de incógnito.
+
+## Actualizar el proyecto
+
+- Modificar los archivos en Visual Studio Code y subir los cambios a `main`:
+
+```powershell
+git add .
+git commit -m "Actualizar proyecto"
+git push origin main
 ```
 
-Para iniciar también la API: `docker compose --profile api up --build`.
+- Esperar a que CI y CD finalicen. Streamlit actualizará la aplicación desde la rama `deploy`.
 
-La estructura conserva `app/`, `data/raw/`, `src/`, `tests/`, `Dockerfile`, `compose.yaml`, `pyproject.toml`, `uv.lock` y los flujos `.github/workflows/ci.yml` y `cd.yml`.
