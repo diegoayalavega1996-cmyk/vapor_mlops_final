@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probar:
+    name: Datos, entrenamiento y pruebas
+    runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - name: 1. Descargar el código
+        uses: actions/checkout@v7
+      - name: 2. Instalar uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          version: "0.13.4"
+          enable-cache: true
+      - name: 3. Instalar Python y dependencias
+        run: uv sync --locked
+      - name: 4. Validar los dos CSV
+        run: uv run --locked preparar-datos
+      - name: 5. Entrenar y evaluar el modelo
+        run: uv run --locked entrenar
+      - name: 6. Ejecutar pruebas
+        run: uv run --locked pytest -v
+      - name: 7. Guardar el modelo validado
+        uses: actions/upload-artifact@v7
+        with:
+          name: modelo-vapor
+          path: |
+            models/vapor_model.joblib
+            models/metrics.json
+            models/test_predictions.csv
+          if-no-files-found: error
+          retention-days: 7
