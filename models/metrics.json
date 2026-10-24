@@ -1,0 +1,217 @@
+{
+  "model_version": "1.0.0",
+  "trained_at": "2026-10-24T02:29:13+00:00",
+  "source_commit": "0450fbf5cabc3766393de3512049425c4ab65722",
+  "model_type": "RandomForestRegressor",
+  "params": {
+    "n_estimators": 200,
+    "max_depth": 20,
+    "min_samples_split": 2,
+    "min_samples_leaf": 2,
+    "max_features": 0.7,
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "features": [
+    "Condenser_Absolute_Pressure_kg_cm2A",
+    "Blower_Air_Flow_kg_h",
+    "Blower_Discharge_Temperature_C",
+    "Turbine_Speed_rpm",
+    "Turbine_Inlet_Steam_Pressure_kg_cm2",
+    "Turbine_Inlet_Steam_Temperature_C",
+    "Seawater_Flow_m3_h",
+    "Seawater_Inlet_Temperature_C",
+    "Seawater_DeltaT_C",
+    "Seawater_Inlet_Pressure_kg_cm2",
+    "Regenerator_Pressure_kg_cm2",
+    "Antisurge_Valve_Opening_pct",
+    "HS_Ejector_Steam_Pressure_kg_cm2",
+    "HS_Ejector_Steam_Temperature_C"
+  ],
+  "target": "Turbine_Steam_Consumption_kg_h",
+  "target_unit": "kg/h",
+  "training_dataset": {
+    "file": "df_operacion.csv",
+    "rows": 82146,
+    "start": "2026-06-01T00:00:00",
+    "end": "2026-08-18T23:59:00",
+    "sha256": "ffbdaa3345f0d4d827f539165c18342b4b27e109788f13709f256a71a1fd5556",
+    "negative_balance_rows": 1
+  },
+  "test_dataset": {
+    "file": "df_operacion2.csv",
+    "rows": 13261,
+    "start": "2026-08-28T17:00:00",
+    "end": "2026-09-06T22:00:00",
+    "sha256": "891062c0640955296a67004fde2cd7aeb079d58554771336c3fb8e9e1becae51",
+    "negative_balance_rows": 0
+  },
+  "evaluation_type": "future_holdout",
+  "cross_validation": {
+    "n_splits": 4,
+    "mean_mae_t_h": 0.5484854333297691,
+    "folds": [
+      {
+        "fold": 1,
+        "train_rows": 16430,
+        "validation_rows": 16429,
+        "train_end": "2026-06-22T06:39:00",
+        "validation_start": "2026-06-22T06:40:00",
+        "validation_end": "2026-07-03T16:28:00",
+        "mae_kg_h": 457.99373668625645,
+        "mae_t_h": 0.4579937366862565,
+        "rmse_kg_h": 730.5615433502682,
+        "rmse_t_h": 0.7305615433502681,
+        "r2": 0.6966954638085061
+      },
+      {
+        "fold": 2,
+        "train_rows": 32859,
+        "validation_rows": 16429,
+        "train_end": "2026-07-03T16:28:00",
+        "validation_start": "2026-07-03T16:29:00",
+        "validation_end": "2026-07-15T09:45:00",
+        "mae_kg_h": 565.8088135811172,
+        "mae_t_h": 0.5658088135811172,
+        "rmse_kg_h": 872.9301299910413,
+        "rmse_t_h": 0.8729301299910414,
+        "r2": 0.7227899393534767
+      },
+      {
+        "fold": 3,
+        "train_rows": 49288,
+        "validation_rows": 16429,
+        "train_end": "2026-07-15T09:45:00",
+        "validation_start": "2026-07-15T09:46:00",
+        "validation_end": "2026-07-26T19:34:00",
+        "mae_kg_h": 449.10636638566854,
+        "mae_t_h": 0.44910636638566853,
+        "rmse_kg_h": 561.8162691731451,
+        "rmse_t_h": 0.5618162691731451,
+        "r2": 0.4976410316876291
+      },
+      {
+        "fold": 4,
+        "train_rows": 65717,
+        "validation_rows": 16429,
+        "train_end": "2026-07-26T19:34:00",
+        "validation_start": "2026-07-26T19:35:00",
+        "validation_end": "2026-08-18T23:59:00",
+        "mae_kg_h": 721.0328166660339,
+        "mae_t_h": 0.7210328166660339,
+        "rmse_kg_h": 1038.77505489302,
+        "rmse_t_h": 1.0387750548930201,
+        "r2": 0.8960177348197378
+      }
+    ]
+  },
+  "test_metrics": {
+    "mae_kg_h": 780.2998612479273,
+    "mae_t_h": 0.7802998612479273,
+    "rmse_kg_h": 1072.469183244282,
+    "rmse_t_h": 1.072469183244282,
+    "r2": 0.8721979909104305
+  },
+  "paper_metrics_reference": {
+    "cv_mae_t_h": 0.548,
+    "mae_t_h": 0.786,
+    "rmse_t_h": 1.077,
+    "r2": 0.871
+  },
+  "feature_ranges": {
+    "Condenser_Absolute_Pressure_kg_cm2A": {
+      "min": 0.0165598299354314,
+      "max": 0.5177808403968811,
+      "median": 0.1006562858819961
+    },
+    "Blower_Air_Flow_kg_h": {
+      "min": 59288.81640625,
+      "max": 139717.6875,
+      "median": 109357.0625
+    },
+    "Blower_Discharge_Temperature_C": {
+      "min": 132.16880798339844,
+      "max": 185.224365234375,
+      "median": 166.6453094482422
+    },
+    "Turbine_Speed_rpm": {
+      "min": 5232.6005859375,
+      "max": 5340.65966796875,
+      "median": 5325.39697265625
+    },
+    "Turbine_Inlet_Steam_Pressure_kg_cm2": {
+      "min": 37.35958480834961,
+      "max": 42.62515258789063,
+      "median": 40.82722854614258
+    },
+    "Turbine_Inlet_Steam_Temperature_C": {
+      "min": 320.1312866210937,
+      "max": 366.22406005859375,
+      "median": 340.60211181640625
+    },
+    "Seawater_Flow_m3_h": {
+      "min": 1258.022705078125,
+      "max": 5000.0,
+      "median": 3094.686279296875
+    },
+    "Seawater_Inlet_Temperature_C": {
+      "min": 19.165904998779297,
+      "max": 25.77023124694824,
+      "median": 21.735950469970703
+    },
+    "Seawater_DeltaT_C": {
+      "min": 2.171720504760742,
+      "max": 13.85940170288086,
+      "median": 7.63553524017334
+    },
+    "Seawater_Inlet_Pressure_kg_cm2": {
+      "min": 4.5506744384765625,
+      "max": 7.533339023590088,
+      "median": 6.460966110229492
+    },
+    "Regenerator_Pressure_kg_cm2": {
+      "min": 0.5611751675605774,
+      "max": 2.8042361736297607,
+      "median": 1.9156038761138914
+    },
+    "Antisurge_Valve_Opening_pct": {
+      "min": 10.5006103515625,
+      "max": 58.81562805175781,
+      "median": 38.898048400878906
+    },
+    "HS_Ejector_Steam_Pressure_kg_cm2": {
+      "min": 9.63186264038086,
+      "max": 12.489702224731444,
+      "median": 11.300362586975098
+    },
+    "HS_Ejector_Steam_Temperature_C": {
+      "min": 226.25393676757807,
+      "max": 289.87481689453125,
+      "median": 257.84918212890625
+    }
+  },
+  "feature_importances_mdi": {
+    "Condenser_Absolute_Pressure_kg_cm2A": 0.24944468366304498,
+    "Blower_Air_Flow_kg_h": 0.013202432547514274,
+    "Blower_Discharge_Temperature_C": 0.23965170736037525,
+    "Turbine_Speed_rpm": 0.00045776164124790726,
+    "Turbine_Inlet_Steam_Pressure_kg_cm2": 0.004392803987511407,
+    "Turbine_Inlet_Steam_Temperature_C": 0.021849766681658393,
+    "Seawater_Flow_m3_h": 0.01328389540960977,
+    "Seawater_Inlet_Temperature_C": 0.005641537544962114,
+    "Seawater_DeltaT_C": 0.3159107728164978,
+    "Seawater_Inlet_Pressure_kg_cm2": 0.007996402149178471,
+    "Regenerator_Pressure_kg_cm2": 0.08578719222446649,
+    "Antisurge_Valve_Opening_pct": 0.03448998354879457,
+    "HS_Ejector_Steam_Pressure_kg_cm2": 0.0012625192965776957,
+    "HS_Ejector_Steam_Temperature_C": 0.0066285411285609
+  },
+  "versions": {
+    "scikit-learn": "1.8.0",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "joblib": "1.5.3"
+  },
+  "model_sha256": "fe56ff5e9c75fcb32577ee01ae37f07a876db526028e72c51133ee59c5422505",
+  "predictions_sha256": "dc649bc5633a45ba15570e660cff01c5326f85d0145c93450d859e5d997eb715"
+}

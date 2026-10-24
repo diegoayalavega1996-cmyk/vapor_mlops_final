@@ -1,0 +1,35 @@
+[project]
+name = "vapor-mlops"
+version = "1.0.0"
+description = "Predicción del consumo de vapor de una turbina de soplador FCC"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy==2.3.5",
+    "pandas==2.2.3",
+    "scikit-learn==1.8.0",
+    "joblib==1.5.3",
+    "streamlit==1.66.0",
+    "fastapi==0.143.2",
+    "pydantic==2.14.1",
+    "uvicorn==0.54.0",
+]
+
+[dependency-groups]
+dev = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[build-system]
+requires = ["setuptools>=80,<85"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[project.scripts]
+preparar-datos = "vapor_mlops.data:main"
+entrenar = "vapor_mlops.train:main"
+predecir = "vapor_mlops.predict:main"
