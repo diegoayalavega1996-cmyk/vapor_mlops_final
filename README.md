@@ -1,6 +1,10 @@
 # Predicción del consumo de vapor
 
-Aplicación en Streamlit para estimar el consumo de vapor de la turbina del soplador FCC mediante Random Forest y 14 variables de operación.
+El consumo de vapor de la turbina del soplador principal de la unidad FCC varía según las condiciones de operación, como el flujo de aire, el vacío del condensador y la presión y temperatura del vapor de entrada. La interacción entre estas variables dificulta establecer cuánto vapor debería consumir el equipo en una condición determinada. Contar con una estimación permite comparar el consumo observado con una referencia y estudiar posibles desviaciones en su comportamiento.
+
+Este proyecto utiliza datos históricos de operación para entrenar un modelo Random Forest que predice el consumo de vapor a partir de 14 variables del proceso. Mediante una aplicación en Streamlit, el usuario ingresa los valores de operación y obtiene el consumo estimado en toneladas por hora (t/h) y kilogramos por hora (kg/h).
+
+El objetivo es facilitar el análisis del consumo de vapor y aportar información para evaluar el desempeño energético de la turbina del soplador.
 
 ## Ejecución local
 
