@@ -1,10 +1,5 @@
 # Modelo y tratamiento de los datos
 
-## Referencias del proyecto
-
-- `paper_referencia.pdf`: *Machine-Learning-Based Analysis and Prediction of Steam Consumption in an FCC Main Air Blower Turbine*. La sección III presenta las variables y la validación temporal. La sección IV.A especifica el Random Forest seleccionado y sus hiperparámetros.
-- Notebook de análisis: `example 5(1).ipynb`. Se conserva el orden de las 14 variables de `selected_features`, el objetivo en kg/h y `random_state=42`.
-- CSV originales, conservados sin editar en `data/raw/`.
 
 ## Hiperparámetros
 
