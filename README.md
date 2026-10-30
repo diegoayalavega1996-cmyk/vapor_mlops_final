@@ -1,3 +1,7 @@
+# Link para predecir el consumo de vapor
+
+https://diegoayalavega1996-cmyk-vapor-mlops-fi-appstreamlit-app-nvbrx8.streamlit.app/
+
 # Predicción del consumo de vapor
 
 El consumo de vapor de la turbina del soplador principal de la unidad FCC varía según las condiciones de operación, como el flujo de aire, el vacío del condensador y la presión y temperatura del vapor de entrada. La interacción entre estas variables dificulta establecer cuánto vapor debería consumir el equipo en una condición determinada. Contar con una estimación permite comparar el consumo observado con una referencia y estudiar posibles desviaciones en su comportamiento.
