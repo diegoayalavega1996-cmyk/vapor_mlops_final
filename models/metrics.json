@@ -1,7 +1,7 @@
 {
   "model_version": "1.0.0",
-  "trained_at": "2026-10-24T03:05:25+00:00",
-  "source_commit": "ea44b92dbd4337024c37da439a5e5480202b3965",
+  "trained_at": "2026-10-30T17:03:54+00:00",
+  "source_commit": "6c226650fad3d122a3fea80bb976306880f0e7df",
   "model_type": "RandomForestRegressor",
   "params": {
     "n_estimators": 200,
