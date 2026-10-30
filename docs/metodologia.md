@@ -1,22 +1,17 @@
 # Modelo y tratamiento de los datos
 
-## Referencias del proyecto
-
-- `paper_referencia.pdf`: *Machine-Learning-Based Analysis and Prediction of Steam Consumption in an FCC Main Air Blower Turbine*. La sección III presenta las variables y la validación temporal. La sección IV.A especifica el Random Forest seleccionado y sus hiperparámetros.
-- Notebook de análisis: `example 5(1).ipynb`. Se conserva el orden de las 14 variables de `selected_features`, el objetivo en kg/h y `random_state=42`.
-- CSV originales, conservados sin editar en `data/raw/`.
 
 ## Hiperparámetros
 
-| Parámetro | Valor | Procedencia |
+| Parámetro | Valor |
 |---|---:|---|
-| `n_estimators` | 200 | Paper, IV.A |
-| `max_depth` | 20 | Paper, IV.A |
-| `min_samples_split` | 2 | Paper, IV.A |
-| `min_samples_leaf` | 2 | Paper, IV.A |
-| `max_features` | 0.7 | Paper, IV.A |
-| `random_state` | 42 | Notebook, celda de optimización |
-| `n_jobs` | 1 | Configuración de ejecución con menor paralelismo |
+| `n_estimators` | 200 |
+| `max_depth` | 20 | 
+| `min_samples_split` | 2 | 
+| `min_samples_leaf` | 2 |
+| `max_features` | 0.7 |
+| `random_state` | 42 | 
+| `n_jobs` | 1 | 
 
 Se emplea `RandomForestRegressor` de scikit-learn. No se vuelve a ejecutar una búsqueda de hiperparámetros ni se cambian los valores del modelo para reducir su tamaño. Se mantienen los valores predeterminados de scikit-learn para los demás parámetros. El modelo se comprime al guardarlo y se reutiliza en memoria durante la inferencia.
 
